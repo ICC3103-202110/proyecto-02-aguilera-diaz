@@ -10,7 +10,7 @@ async function app(state, update, view){
 
     try {
         while (true){
-            const {model, currentView} = state
+            var {model, currentView} = state
             const {table, Title} = currentView
             console.clear()
             console.log(Title)
@@ -20,8 +20,11 @@ async function app(state, update, view){
                 console.log("NO CITIES")
             }else{
                 printTable(table)
+                
             }
             console.log()
+            
+            model = { Name: '', Temp: '', Max: '', Min: '' }
 
             
     
@@ -48,23 +51,30 @@ async function app(state, update, view){
                     
                     
                     //citiesdel.push(delet(cities_info, dele))
-                    citiesdel.push((delet(cities_info, dele)))
+
+                    /*citiesdel.push((delet(cities_info, dele)))
                     citydeleted = delet(cities_info, dele)
                     const index = cities_info.indexOf(citydeleted[0]);
                     if (index > -1) {
                         cities_info.splice(index, 1);
-                    }
+                    }*/
+                    cities_info = delet(cities_info, dele)
+                
                     
                     
                     
                 }else if (Action === "Update City"){
                     const {Update_City} = await(UpdateCity(cities_info))
                     upcity = Update_City
-                    cityupdated = update(upcity)
+
+                    /*cityupdated = update(upcity)
                     citydeleted = delet(cities_info, upcity)
+                    console.log(cityupdated)
+                    console.log(citydeleted)
                     const index = cities_info.indexOf(citydeleted[0]);
-                    cities_info.splice(index,1,cityupdated)
+                    cities_info.splice(index,1,cityupdated)*/
                     
+                    cities_info = update2(upcity, cities_info)
                 }
             }
             

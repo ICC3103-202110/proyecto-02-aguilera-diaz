@@ -55,11 +55,6 @@ function Location(){
 
 function DeleteCity(cities_info){
     const del = "Delete City"
-    //usar map
-
-    //cities_info.forEach(element => {
-        //choices3.push(element.Name)
-    //});
     
     const getName = people => people.Name
     const citiesFilter = cities_info.map(getName)
@@ -89,17 +84,14 @@ function UpdateCity(cities_info){
 
 function table(model){
     //usar funcion map
-    const result = []
+    const result = model
+
+    /*result = []
     for (let index = 0; index < model.length; index++) {
         const element = model[index];
         result.push({ Name: element.Name, Temp: element.Temp, Max: element.Max, Min: element.Min })
-    }
-
-    /*var result = model.map(function(cityInf){
-        return cityInf.Name, cityInf.Temp, cityInf.Max, cityInf.Min
-    })
-    console.log(result)*/
-
+    }*/
+    
     return result
     
 }

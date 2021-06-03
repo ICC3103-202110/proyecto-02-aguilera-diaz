@@ -20,13 +20,14 @@ function update(Add_City, model){
         const temp1 = Math.round(temp * 100) / 100
         const ma1 = Math.round(ma * 100) / 100
         const mi1 = Math.round(mi * 100) / 100
-
+        
         return {
             ...model,
             Name: Add_City, 
             Temp: temp1, 
             Max: ma1, 
             Min: mi1
+            
         }
     
 }
@@ -43,25 +44,16 @@ function delet(cities_info, dele){
     //return result
 
     //usar map
-    var lista = []
     
-    var c = cities_info
-    for( var i = 0; i < cities_info.length; i++){ 
-        if ( cities_info[i].Name !== dele) { 
-            //result = c.splice(i, 1); 
-            lista.push({Name:cities_info[i].Name, Temp:cities_info[i].Temp, Max:cities_info[i].Max, Min:cities_info[i].Min})
 
-        }
-    }
     var city_filter = cities_info.filter(function(city){
-        return city.Name === dele // funciona con el igual pero no el distinto
+        return city.Name !== dele
     })
     
-    //console.log(result)  //lista que elimina
     
     return city_filter
 }
-function update2(Add_City){
+function update2(Add_City, cities_info){
     max1 = 40
     min1 = 12
     x = Math.floor(Math.random()* (1+max1 - min1)+min1)
@@ -84,12 +76,18 @@ function update2(Add_City){
     const ma1 = Math.round(ma * 100) / 100
     const mi1 = Math.round(mi * 100) / 100
 
-    return {
+    var city_filter2 = cities_info.filter(function(city){
+        return city.Name === Add_City
+    })
+    const index = cities_info.indexOf(city_filter2[0]);
+    cities_info.splice(index,1,{ Name: Add_City,Temp: temp1, Max: ma1, Min: mi1 })
+    return cities_info
+    /*return {
         Name: Add_City, 
         Temp: temp1, 
         Max: ma1, 
         Min: mi1
-    }
+    }*/
 
 }
 
