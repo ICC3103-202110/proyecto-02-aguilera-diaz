@@ -1,5 +1,6 @@
 const {Questions1, Questions2, Location, DeleteCity, UpdateCity} = require("./view");
 const {delet, update2} = require("./update");
+const {get_weather} = require("./api");
 const {printTable} = require('console-table-printer');
 
 async function app(state, update, view){
@@ -12,7 +13,7 @@ async function app(state, update, view){
         while (true){
             var {model, currentView} = state
             const {table, Title} = currentView
-            console.clear()
+            //console.clear()
             console.log(Title)
             len = cities.length
             len2 = cities_info.length
@@ -33,14 +34,14 @@ async function app(state, update, view){
                 city = Add_City
                 cities.push(city)
                 
-                cities_info.push(update(city, model))
+                cities_info.push(await(update(city, model)))
             }else{
                 const {Action_2} = await(Questions2())
                 Action = Action_2
                 if (Action === "Add City"){
                     const {Add_City_2} = await(Location())
                     city = Add_City_2
-                    cities_info.push(update(city, model))
+                    cities_info.push(await(update(city, model)))
                 }else if (Action === "Delete City"){
                     citiesdel = []
                     const {Delete_City} = await(DeleteCity(cities_info))
@@ -74,7 +75,7 @@ async function app(state, update, view){
                     const index = cities_info.indexOf(citydeleted[0]);
                     cities_info.splice(index,1,cityupdated)*/
                     
-                    cities_info = update2(upcity, cities_info)
+                    cities_info = await(update2(upcity, cities_info))
                 }
             }
             

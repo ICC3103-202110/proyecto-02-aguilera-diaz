@@ -1,32 +1,17 @@
-function update(Add_City, model){
-        max1 = 40
-        min1 = 12
-        x = Math.floor(Math.random()* (1+max1 - min1)+min1)
-        y = Math.floor(Math.random()* (1+max1 - min1)+min1)
+const axios = require('axios')
 
-        if (x>y){
-            var max = x
-            var min = y
-        }else{
-            var max = y
-            var min = x
-        }
-
-        var random = Math.random()
-        const temp = random * (max - min + 1) + max/4
-        const ma = random * (max - min + 1) + max/3
-        const mi = random * (max - min + 1) + max/6
-
-        const temp1 = Math.round(temp * 100) / 100
-        const ma1 = Math.round(ma * 100) / 100
-        const mi1 = Math.round(mi * 100) / 100
-        
+async function update(Add_City, model){ //PREGUNTAR SI PUEDEN HABER 2 FUNCIONES ASYNC
+        const data = await(axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${Add_City}&units=metric&appid=b27e4e025660c5bfb4b6bd18502560aa`))
+        const temp = data.data.main.temp
+        const max = data.data.main.temp_max
+        const min = data.data.main.temp_min
+    
         return {
             ...model,
             Name: Add_City, 
-            Temp: temp1, 
-            Max: ma1, 
-            Min: mi1
+            Temp: temp, 
+            Max: max, 
+            Min: min
             
         }
     
@@ -53,34 +38,17 @@ function delet(cities_info, dele){
     
     return city_filter
 }
-function update2(Add_City, cities_info){
-    max1 = 40
-    min1 = 12
-    x = Math.floor(Math.random()* (1+max1 - min1)+min1)
-    y = Math.floor(Math.random()* (1+max1 - min1)+min1)
-
-    if (x>y){
-        var max = x
-        var min = y
-    }else{
-        var max = y
-        var min = x
-    }
-
-    var random = Math.random()
-    const temp = random * (max - min + 1) + max/4
-    const ma = random * (max - min + 1) + max/3
-    const mi = random * (max - min + 1) + max/6
-
-    const temp1 = Math.round(temp * 100) / 100
-    const ma1 = Math.round(ma * 100) / 100
-    const mi1 = Math.round(mi * 100) / 100
+async function update2(Add_City, cities_info){
+    const data = await(axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${Add_City}&units=metric&appid=b27e4e025660c5bfb4b6bd18502560aa`))
+    const temp = data.data.main.temp
+    const max = data.data.main.temp_max
+    const min = data.data.main.temp_min
 
     var city_filter2 = cities_info.filter(function(city){
         return city.Name === Add_City
     })
     const index = cities_info.indexOf(city_filter2[0]);
-    cities_info.splice(index,1,{ Name: Add_City,Temp: temp1, Max: ma1, Min: mi1 })
+    cities_info.splice(index,1,{ Name: Add_City,Temp: temp, Max: max, Min: min })
     return cities_info
     /*return {
         Name: Add_City, 
