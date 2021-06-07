@@ -83,14 +83,7 @@ function UpdateCity(cities_info){
 }
 
 function table(model){
-    //usar funcion map
     const result = model
-
-    /*result = []
-    for (let index = 0; index < model.length; index++) {
-        const element = model[index];
-        result.push({ Name: element.Name, Temp: element.Temp, Max: element.Max, Min: element.Min })
-    }*/
     
     return result
     
